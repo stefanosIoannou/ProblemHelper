@@ -6,6 +6,7 @@
 ## Commands
 ### Close
 `close`
+
 Closes the application
 
 ### Build
