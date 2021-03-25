@@ -7,9 +7,9 @@ public class Fridge {
     private int z;
     private int x;
 
-    private Boolean printObjects = false;
+    private Boolean printObjects = true;
 
-    private Boolean printStrudy = false;
+    private Boolean printStrudy = true;
 
     /**
      * Build Fridge

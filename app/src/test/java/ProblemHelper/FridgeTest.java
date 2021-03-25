@@ -17,7 +17,7 @@ public class FridgeTest {
      */
     @Test
     public void test2DFridge() throws Exception {
-        Fridge foo = new Fridge("build", "3", "2", "1");
+        Fridge foo = new Fridge("build", "3", "2", "1", "false","false");
 
         // 0 - 2 - 4
         // 1 - 3 - 5
@@ -33,7 +33,7 @@ public class FridgeTest {
      */
     @Test
     public void test2DFridgeWithObjects() throws Exception {
-        Fridge foo = new Fridge("build", "3", "2", "1", "true");
+        Fridge foo = new Fridge("build", "3", "2", "1", "true","false");
 
         // 0 - 2 - 4
         // 1 - 3 - 5
@@ -49,7 +49,7 @@ public class FridgeTest {
      */
     @Test
     public void test3DFridge() throws Exception {
-        Fridge foo = new Fridge("build", "2", "2", "2");
+        Fridge foo = new Fridge("build", "2", "2", "2", "false","false");
 
         // Front
         // 0 - 2
@@ -71,7 +71,7 @@ public class FridgeTest {
      */
     @Test
     public void test3DFridgeSturdy() throws Exception {
-        Fridge foo = new Fridge("build", "2", "2", "2","","true");
+        Fridge foo = new Fridge("build", "2", "2", "2","false");
 
         // Front
         // 0 - 2
