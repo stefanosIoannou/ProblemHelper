@@ -12,7 +12,7 @@ public class App {
         terminate = false;
         while (!terminate) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Enter a comman: ");
+            System.out.println("Enter a command: ");
             String str = sc.nextLine(); // reads string
             Thread execution = (new Thread(){
 
