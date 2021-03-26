@@ -24,6 +24,8 @@ public class App {
                         if (command.equals("build")) {
                             System.out.println("Executing build");
                             try {
+                                // Print the hand
+                                System.out.println("; Hand \n hand - position \n (hand ?hand)\n");
                                 System.out.println(new Fridge(commands).toString());
                             } catch (Exception e) {
                                 e.printStackTrace();
