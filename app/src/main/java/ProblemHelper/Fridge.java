@@ -42,7 +42,7 @@ public class Fridge {
         builder.append("; Fridge\n").append("; Positions\n");
 
         // Positions
-        for (int i = 0; i < totalPositions; ++i) {
+        for (int i = 1; i <= totalPositions; ++i) {
             builder.append("p" + i + " ");
         }
         if (totalPositions > 0)

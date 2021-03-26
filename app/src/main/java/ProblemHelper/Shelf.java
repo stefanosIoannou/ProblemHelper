@@ -85,7 +85,8 @@ public class Shelf {
 
         // Print shelf title
         builder.append("\n").append("\n").append("; Shelf #" + index).append("\n")
-                .append("; Start counting from: " + startCountingFrom).append("\n");
+                .append("; Start counting from: " + startCountingFrom).append("\n")
+                .append("; Shelve Dimensions: " + x + " * " + y + " * " + z).append("\n");
 
         for (int d = 0; d < z; ++d) {
             for (int c = 0; c < y; ++c) {
