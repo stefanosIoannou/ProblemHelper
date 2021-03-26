@@ -10,8 +10,6 @@
 Closes the application
 
 ### Build
-`build x y z [objects] [sturdy]`
+`build x y z [x y z]*`
 
-This will create a fridge environment based on the dimensions used. The command will only output relations between position objects.
-To output position declarations use true in place of objects. To output wether an item is sturdy or not use true in place of sturdy. 
-By default all positions are sturdy except the bottom ones.
+This will create a fridge environment based on the dimensions used. The command will output relations between position objects, object declarations and sturdiness. Each triplet of positions represents a shelf. the hand object and necessary predicate are also printed.
