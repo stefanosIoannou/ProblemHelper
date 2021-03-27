@@ -25,10 +25,10 @@ public class Fridge {
         // Dimensions
 
         for (int s = 0; s < noOfShelves; ++s) {
-            int y = Integer.valueOf(args[1]);
-            int x = Integer.valueOf(args[2]);
+            int x = Integer.valueOf(args[1]);
+            int y = Integer.valueOf(args[2]);
             int z = Integer.valueOf(args[3]);
-            shelfList.add(new Shelf(totalPositions + 1, s, y, x, z));
+            shelfList.add(new Shelf(totalPositions + 1, s, x, y, z));
             totalPositions += y * x * z;
         }
     }
@@ -52,6 +52,9 @@ public class Fridge {
         for (Shelf shelf : shelfList) {
             builder.append(shelf.toString());
         }
+
+        // No items in the fridge
+        builder.append("\n; Currently no items in the fridge\n(= (items_in_fridge) 0)\n");
         return builder.toString();
     }
 

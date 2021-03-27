@@ -21,7 +21,7 @@ public class Position {
 
     @Override
     public String toString() {
-        return "?p" + String.valueOf(num);
+        return "p" + String.valueOf(num);
     }
 
     public String getRelation() {

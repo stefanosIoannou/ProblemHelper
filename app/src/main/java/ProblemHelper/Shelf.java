@@ -11,9 +11,9 @@ public class Shelf {
 
     Position[][][] shelf;
 
-    private int y;
-    private int z;
-    private int x;
+    private final int x;
+    private final int y;
+    private final int z;
 
     // Where should the counting start
     private final int startCountingFrom;
@@ -23,8 +23,8 @@ public class Shelf {
 
     public Shelf(int startCountingFrom, int index, int xIn, int yIn, int zIn) {
         this.index = index;
-        this.y = yIn;
         this.x = xIn;
+        this.y = yIn;
         this.z = zIn;
 
         shelf = new Position[x][y][z];
@@ -33,9 +33,9 @@ public class Shelf {
         int count = this.startCountingFrom;
         // Create position numbers
         for (int d = 0; d < z; ++d) {
-            for (int c = 0; c < y; ++c) {
-                for (int r = 0; r < x; ++r) {
-                    shelf[r][c][d] = new Position(count);
+            for (int c = 0; c < x; ++c) {
+                for (int r = 0; r < y; ++r) {
+                    shelf[c][r][d] = new Position(count);
                     ++count;
                 }
             }
@@ -43,35 +43,35 @@ public class Shelf {
 
         // Set Top of relation
         for (int d = 0; d < z; ++d) {
-            for (int c = 0; c < y; ++c) {
-                for (int r = 0; r < x - 1; ++r) {
-                    shelf[r][c][d].setTopOf(shelf[r + 1][c][d]);
+            for (int c = 0; c < x; ++c) {
+                for (int r = 0; r < y - 1; ++r) {
+                    shelf[c][r][d].setTopOf(shelf[c][r + 1][d]);
                 }
             }
         }
 
         // Set Right of relation
         for (int d = 0; d < z; ++d) {
-            for (int c = 0; c < y - 1; ++c) {
-                for (int r = 0; r < x; ++r) {
-                    shelf[r][c][d].setRight(shelf[r][c + 1][d]);
+            for (int r = 0; r < y; ++r) {
+                for (int c = 0; c < x - 1; ++c) {
+                    shelf[c][r][d].setRight(shelf[c + 1][r][d]);
                 }
             }
         }
 
         // Set in front of relation
         for (int d = 0; d < z - 1; ++d) {
-            for (int c = 0; c < y; ++c) {
-                for (int r = 0; r < x; ++r) {
-                    shelf[r][c][d].setFrontOf(shelf[r][c][d + 1]);
+            for (int c = 0; c < x; ++c) {
+                for (int r = 0; r < y; ++r) {
+                    shelf[c][r][d].setFrontOf(shelf[c][r][d + 1]);
                 }
             }
         }
 
         // Set the last layer to sturdy
         for (int d = 0; d < z; ++d) {
-            for (int c = 0; c < y; ++c) {
-                shelf[x - 1][c][d].setSturdy(true);
+            for (int c = 0; c < x; ++c) {
+                shelf[c][y-1][d].setSturdy(true);
             }
         }
     }
@@ -89,17 +89,18 @@ public class Shelf {
                 .append("; Shelve Dimensions: " + x + " * " + y + " * " + z).append("\n");
 
         for (int d = 0; d < z; ++d) {
-            for (int c = 0; c < y; ++c) {
-                for (int r = 0; r < x; ++r) {
-                    builder.append(shelf[r][c][d].getRelation());
+            for (int c = 0; c < x; ++c) {
+                for (int r = 0; r < y; ++r) {
+                    builder.append(shelf[c][r][d].getRelation());
                 }
             }
         }
 
+        builder.append("\n; Sturdiness\n");
         for (int d = 0; d < z; ++d) {
-            for (int c = 0; c < y; ++c) {
-                for (int r = 0; r < x; ++r) {
-                    builder.append(shelf[r][c][d].getSturdy());
+            for (int c = 0; c < x; ++c) {
+                for (int r = 0; r < y; ++r) {
+                    builder.append(shelf[c][r][d].getSturdy());
                 }
             }
         }
