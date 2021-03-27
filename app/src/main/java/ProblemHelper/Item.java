@@ -17,9 +17,9 @@ public enum Item {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("\n;Item\n").append("item - ").append(stringName);
-        builder.append("\n ; Total Orientations\n").append("(= (no_orientations item) " + noOfOrientations + ")");
-        builder.append("\n");
+        builder.append("\n;Item\n").append("item - ").append(stringName).append("\n ; Total Orientations\n")
+                .append("(= (no_orientations item) " + noOfOrientations + ")").append("\n")
+                .append("\n;Item is in the bag \n").append("(in_bag item)\n");
 
         // If the object has orientations, print all orientations
         for (int i = 0; i < noOfOrientations; ++i) {
@@ -30,7 +30,7 @@ public enum Item {
 
     public static String assignOrientation(Item item, int orientationIndex) {
         if (orientationIndex < item.noOfOrientations) {
-            return "\n(has_orientation " + item.stringName + " " + orientations[orientationIndex] + ")\n";
+            return "\n(has_orientation item " + orientations[orientationIndex] + ")\n";
         }
         return "";
     }

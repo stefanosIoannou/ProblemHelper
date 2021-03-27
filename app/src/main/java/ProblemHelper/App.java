@@ -25,7 +25,7 @@ public class App {
                             System.out.println("Executing build");
                             try {
                                 // Print the hand
-                                System.out.println("; Hand \n (hand hand)\n");
+                                System.out.println("; Hand \n (hand hand)\n (sturdy hand)\n");
                                 System.out.println(new Fridge(commands).toString());
                             } catch (Exception e) {
                                 e.printStackTrace();
