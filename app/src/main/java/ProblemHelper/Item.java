@@ -14,12 +14,15 @@ public enum Item {
         this.noOfOrientations = noOfOrientations;
     }
 
-    @Override
-    public String toString() {
+    public String toString(String itemName) {
+        if (itemName == null) {
+            itemName = "item";
+        }
         StringBuilder builder = new StringBuilder();
-        builder.append("\n;Item\n").append("item - ").append(stringName).append("\n ; Total Orientations\n")
-                .append("(= (no_orientations item) " + noOfOrientations + ")").append("\n")
-                .append("\n;Item is in the bag \n").append("(in_bag item)\n");
+        builder.append("\n; Item: ").append(itemName).append("\n").append(itemName).append(" - ").append(stringName)
+                .append("\n ; Total Orientations\n")
+                .append("(= (no_orientations " + itemName + ") " + noOfOrientations + ")").append("\n")
+                .append("\n;" + itemName + " is in the bag \n").append("(in_bag " + itemName + ")\n");
 
         // If the object has orientations, print all orientations
         for (int i = 0; i < noOfOrientations; ++i) {

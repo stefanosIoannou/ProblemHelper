@@ -69,15 +69,18 @@ public class App {
                             }
 
                             if (itemOfThis != null) {
-                                toPrint = itemOfThis.toString();
+                                if (commands.length > 3)
+                                    toPrint = itemOfThis.toString(commands[3]);
+                                else
+                                    toPrint = itemOfThis.toString(null);
                             }
                             System.out.println(toPrint);
                             if (commands.length > 2)
                                 System.out.println(Item.assignOrientation(itemOfThis, Integer.valueOf(commands[2])));
-
                         } else if (command.equals("init")) {
-                            System.out.println("(define (problem another_problem)\n(:domain example)\n;(:situation <situation_name>) ;deprecated\n(:objects\n\n)\n(:init\n\n)\n(:goal\n(and\n\n)\n)\n)\n\n");
-                        }else {
+                            System.out.println(
+                                    "(define (problem another_problem)\n(:domain example)\n;(:situation <situation_name>) ;deprecated\n(:objects\n\n)\n(:init\n\n)\n(:goal\n(and\n\n)\n)\n)\n\n");
+                        } else {
                             System.out.println("Invalid command");
                         }
                     }
