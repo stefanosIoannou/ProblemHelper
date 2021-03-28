@@ -4,9 +4,13 @@
 package ProblemHelper;
 
 import java.util.Scanner;
+import java.awt.datatransfer.StringSelection;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
 
 public class App {
     private static boolean terminate;
+    private static final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
     public static void main(String[] args) throws Exception {
         terminate = false;
@@ -21,67 +25,79 @@ public class App {
                     String[] commands = str.split(" ");
                     if (commands.length > 0) {
                         final String command = commands[0];
-                        if (command.equals("build")) {
-                            System.out.println("Executing build");
-                            try {
-                                // Print the hand
-                                System.out.println("; Hand \n (hand hand)\n (sturdy hand)\n");
-                                System.out.println(new Fridge(commands).toString());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            System.out.println("Done");
-                        } else if (command.equals("close")) {
+
+                        // Close the application
+                        if (command.equals("close")) {
                             terminate = true;
                             System.out.println("Bye bye");
 
-                            // Print Item Configuration
-                        } else if (command.equals("item")) {
-                            String toPrint = "Not found\n";
-                            Item itemOfThis = null;
-
-                            try {
-                                switch (Item.valueOf(commands[1])) {
-                                case ONE_ONE_ONE:
-                                    itemOfThis = Item.ONE_ONE_ONE;
-                                    break;
-                                case ONE_ONE_THREE:
-                                    itemOfThis = Item.ONE_ONE_THREE;
-                                    break;
-                                case ONE_ONE_TWO:
-                                    itemOfThis = Item.ONE_ONE_TWO;
-                                    break;
-                                case ONE_TWO_THREE:
-                                    toPrint = Item.ONE_TWO_THREE.toString();
-                                    itemOfThis = Item.ONE_TWO_THREE;
-                                    break;
-                                case ONE_TWO_TWO:
-                                    itemOfThis = Item.ONE_TWO_TWO;
-                                    break;
-                                case TWO_TWO_TWO:
-                                    itemOfThis = Item.TWO_TWO_TWO;
-                                    break;
-                                default:
-                                    break;
-                                }
-                            } catch (Exception e) {
-
-                            }
-
-                            if (itemOfThis != null) {
-                                if (commands.length > 3)
-                                    toPrint = itemOfThis.toString(commands[3]);
-                                else
-                                    toPrint = itemOfThis.toString(null);
-                            }
-                            System.out.println(toPrint);
-                            if (commands.length > 2)
-                                System.out.println(Item.assignOrientation(itemOfThis, Integer.valueOf(commands[2])));
-                        } else if (command.equals("init")) {
-                            System.out.println(
-                                    "(define (problem another_problem)\n(:domain example)\n;(:situation <situation_name>) ;deprecated\n(:objects\n\n)\n(:init\n\n)\n(:goal\n(and\n\n)\n)\n)\n\n");
                         } else {
-                            System.out.println("Invalid command");
+                            // Mark start of build
+                            System.out.println("### Executing build");
+
+                            if (command.equals("build")) {
+                                try {
+                                    toClipBoardAndPrint("; Hand \n (hand hand)\n (sturdy hand)",
+                                            new Fridge(commands).toString());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                // Ctreate item
+                            } else if (command.equals("item")) {
+                                String toPrint = "Not found\n";
+                                Item itemOfThis = null;
+
+                                try {
+                                    switch (Item.valueOf(commands[1])) {
+                                    case ONE_ONE_ONE:
+                                        itemOfThis = Item.ONE_ONE_ONE;
+                                        break;
+                                    case ONE_ONE_THREE:
+                                        itemOfThis = Item.ONE_ONE_THREE;
+                                        break;
+                                    case ONE_ONE_TWO:
+                                        itemOfThis = Item.ONE_ONE_TWO;
+                                        break;
+                                    case ONE_TWO_THREE:
+                                        toPrint = Item.ONE_TWO_THREE.toString();
+                                        itemOfThis = Item.ONE_TWO_THREE;
+                                        break;
+                                    case ONE_TWO_TWO:
+                                        itemOfThis = Item.ONE_TWO_TWO;
+                                        break;
+                                    case TWO_TWO_TWO:
+                                        itemOfThis = Item.TWO_TWO_TWO;
+                                        break;
+                                    default:
+                                        break;
+                                    }
+                                } catch (Exception e) {
+
+                                }
+
+                                if (itemOfThis != null) {
+                                    if (commands.length > 3)
+                                        toPrint = itemOfThis.toString(commands[3]);
+                                    else
+                                        toPrint = itemOfThis.toString(null);
+                                }
+
+                                // Print orientation
+                                String orientation = null;
+                                if (commands.length > 2)
+                                    orientation = Item.assignOrientation(itemOfThis, Integer.valueOf(commands[2]));
+
+                                toClipBoardAndPrint(toPrint, orientation);
+                            } else if (command.equals("init")) {
+                                toClipBoardAndPrint(
+                                        "(define (problem another_problem)\n(:domain example)\n;(:situation <situation_name>) ;deprecated\n(:objects\n\n)\n(:init\n\n)\n(:goal\n(and\n\n)\n)\n)\n\n");
+                            } else {
+                                System.out.println("Invalid command");
+                            }
+
+                            // Mark end of build
+                            System.out.println("### Done");
                         }
                     }
                 }
@@ -90,5 +106,20 @@ public class App {
             execution.start();
             execution.join();
         }
+    }
+
+    private static void toClipBoardAndPrint(String... stringList) {
+        StringBuilder stringBuilder = new StringBuilder("\n");
+        for (String str : stringList) {
+            if (str != null)
+                stringBuilder.append(str).append("\n");
+        }
+
+        // Copy to clipboard
+        String toReturn = stringBuilder.toString();
+        clipboard.setContents(new StringSelection(toReturn), null);
+
+        System.out.println(toReturn);
+        System.out.println("## COPIED TO CLIPBOARD!");
     }
 }
