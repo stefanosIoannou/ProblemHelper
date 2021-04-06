@@ -76,17 +76,17 @@ public class App {
 
                                 }
 
-                                if (itemOfThis != null) {
-                                    if (commands.length > 3)
-                                        toPrint = itemOfThis.toString(commands[3]);
-                                    else
-                                        toPrint = itemOfThis.toString(null);
-                                }
+                                // Get item name
+                                String itemName = null;
+                                if (itemOfThis != null && commands.length > 3)
+                                    itemName = commands[3];
+                                toPrint = itemOfThis.toString(itemName);
 
                                 // Print orientation
                                 String orientation = null;
                                 if (commands.length > 2)
-                                    orientation = Item.assignOrientation(itemOfThis, Integer.valueOf(commands[2]));
+                                    orientation = Item.assignOrientation(itemOfThis, Integer.valueOf(commands[2]),
+                                            itemName);
 
                                 toClipBoardAndPrint(toPrint, orientation);
                             } else if (command.equals("init")) {

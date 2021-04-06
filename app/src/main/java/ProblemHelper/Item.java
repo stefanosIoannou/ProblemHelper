@@ -1,8 +1,8 @@
 package ProblemHelper;
 
 public enum Item {
-    ONE_ONE_ONE("one_one_one", 1), TWO_TWO_TWO("two_two_two", 1), ONE_ONE_THREE("one_one_three", 2),
-    ONE_TWO_TWO("one_two_two", 2), ONE_ONE_TWO("one_one_two", 2), ONE_TWO_THREE("one_two_three", 6),
+    ONE_ONE_ONE("one_one_one", 1), TWO_TWO_TWO("two_two_two", 1), ONE_ONE_THREE("one_one_three", 3),
+    ONE_TWO_TWO("one_two_two", 3), ONE_ONE_TWO("one_one_two", 2), ONE_TWO_THREE("one_two_three", 6),
     UNKOWN("UNKNOWN", 2);
 
     private final String stringName;
@@ -31,9 +31,11 @@ public enum Item {
         return builder.toString();
     }
 
-    public static String assignOrientation(Item item, int orientationIndex) {
+    public static String assignOrientation(Item item, int orientationIndex, String itemName) {
+        if (itemName == null)
+            itemName = "item";
         if (orientationIndex < item.noOfOrientations) {
-            return "\n(has_orientation item " + orientations[orientationIndex] + ")\n";
+            return "\n(has_orientation " + itemName + " " + orientations[orientationIndex] + ")\n";
         }
         return "";
     }

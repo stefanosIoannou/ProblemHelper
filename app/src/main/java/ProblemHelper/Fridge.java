@@ -24,10 +24,11 @@ public class Fridge {
         int noOfShelves = noOfDimenstions / 3;
         // Dimensions
 
+        int startIndex = 0;
         for (int s = 0; s < noOfShelves; ++s) {
-            int x = Integer.valueOf(args[1]);
-            int y = Integer.valueOf(args[2]);
-            int z = Integer.valueOf(args[3]);
+            int x = Integer.valueOf(args[++startIndex]);
+            int y = Integer.valueOf(args[++startIndex]);
+            int z = Integer.valueOf(args[++startIndex]);
             shelfList.add(new Shelf(totalPositions + 1, s, x, y, z));
             totalPositions += y * x * z;
         }
