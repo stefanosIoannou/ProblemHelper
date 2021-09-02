@@ -1,4 +1,5 @@
 # ProblemHelper
+Quick Java command line application, to generate the content of domain and problem files for an AI planning project.
 All outputs printed on the console, are also copied to the clipboard automatically
 
 ## Run jar file:
